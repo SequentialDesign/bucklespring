@@ -21,7 +21,7 @@
 
 #include "buckle.h"
 
-#define MAX_SOURCES 32
+#define MAX_SOURCES 64
 #define DEFAULT_MUTE_KEYCODE 0x46 /* Scroll Lock */
 #define MAX_NUM_SAMPLES 3 /* Maximum number of samples per key */
 
