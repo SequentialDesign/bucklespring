@@ -58,45 +58,109 @@ int scan(int verbose)
 
 void key_pressed_cb(XPointer arg, XRecordInterceptData *d) 
 {
-	if (d->category != XRecordFromServer)
-		return;
+    if (d->category != XRecordFromServer)
+        return;
     
-	int key = ((unsigned char*) d->data)[1];
-	int type = ((unsigned char*) d->data)[0] & 0x7F;
-	int repeat = d->data[2] & 1;
-
-	key -= 8; /* X code to scan code? */
-
-	if(!repeat) {
-
-		switch (type) {
-			case KeyPress:
-				play(key, 1);
-				break;
-			case KeyRelease:
-				play(key, 0);
-				break;
-			/*case ButtonPress:
-				play(0xff, 1);
-				break;
+    int key = ((unsigned char*) d->data)[1];
+    int type = ((unsigned char*) d->data)[0] & 0x7F;
+    int repeat = d->data[2] & 1;
+    
+    key -= 8; /* X code to scan code? */
+    
+    if(!repeat) {
+        
+        switch (type) {
+        case KeyPress:
+            play(key, 1);
+            break;
+        case KeyRelease:
+            play(key, 0);
+            break;
+            /*case ButtonPress:
+                                play(0xff, 1);
+                                break;
 			case ButtonRelease:
 				play(0xff, 0);
-				break;*/
-			case ButtonPress:
+                                break;*/
+        case ButtonPress:
             switch(key) {
-				//if(key == -5 || key == -6 || key == -7 || key == -4 || key == -3 || key == -2 || key == -1 || key == 0 || key == 1 || key == 2 || key == 3 || key == 4 || key == 5)
-            case -5:
-                play(0xff, 1);
+                //if(key == -5 || key == -6 || key == -7 || key == -4 || key == -3 || key == -2 || key == -1 || key == 0 || key == 1 || key == 2 || key == 3 || key == 4 || key == 5)
+            case -7: // left-click button 1
+                play(0xf0, 1);
+                break;
+            case -6: // middle-click button 2
+                play(0xf1, 1);
+                break;
+            case -5: // right-click button 3
+                play(0xf2, 1);
+                break;
+            case -4: // scroll up button 4
+                play(0xf3, 1);
+                break;
+            case -3: // scroll down button 5
+                play(0xf4, 1);
+                break;
+            case -2: // button 6 horizontal scroll left
+                play(0xf5, 1);
+                break;
+            case -1: // button 7 horizontal scroll right
+                play(0xf6, 1);
+                break;
+            case 0: // button 8 back
+                play(0xf7, 1);
+                break;
+            case 1: // button 9 forward
+                play(0xf8, 1);
+                break;
+            case 2: // button 10 high
+                play(0xf9, 1);
+                break;
+            case 3: // button 11 low
+                play(0xfa, 1);
+                break;
+            case 4: // button 12 ring
+                play(0xfb, 1);
                 break;
             default:
                 break;
             }
             break;
-			case ButtonRelease:
+        case ButtonRelease:
             switch(key) {
-				//if(key == -5 || key == -6 || key == -7 || key == -4 || key == -3 || key == -2 || key == -1 || key == 0 || key == 1 || key == 2 || key == 3 || key == 4 || key == 5)
-            case -5:
-                play(0xff, 0);
+                //if(key == -5 || key == -6 || key == -7 || key == -4 || key == -3 || key == -2 || key == -1 || key == 0 || key == 1 || key == 2 || key == 3 || key == 4 || key == 5)
+            case -7: // left-click button 1
+                play(0xf0, 0);
+                break;
+            case -6: // middle-click button 2
+                play(0xf1, 0);
+                break;
+            case -5: // right-click button 3
+                play(0xf2, 0);
+                break;
+            case -4: // scroll up button 4
+                break;
+            case -3: // scroll down button 5
+                break;
+            case -2: // button 6 horizontal scroll left
+                play(0xf5, 0);
+                break;
+            case -1: // button 7 horizontal scroll right
+                play(0xf6, 0);
+                break;
+            case 0: // button 8 back
+                play(0xf7, 0);
+                break;
+            case 1: // button 9 forward
+                play(0xf8, 0);
+                break;
+            case 2: // button 10 high
+                play(0xf9, 0);
+                break;
+            case 3: // button 11 low
+                play(0xfa, 0);
+                break;
+            case 4: // button 12 ring
+                play(0xfb, 0);
                 break;
             default:
                 break;
@@ -104,10 +168,10 @@ void key_pressed_cb(XPointer arg, XRecordInterceptData *d)
             break;
         default:
             break;
-		}
-	}
-
-	XRecordFreeData (d);
+        }
+    }
+    
+    XRecordFreeData (d);
 }
 
 
