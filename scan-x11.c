@@ -5,7 +5,8 @@
 
 #include "buckle.h"
 
-/* start hex for mouse button wav files*/
+/* start hex for mouse button wav files.
+ * this is where left-click is located */
 #define initial_button_hex 0xf0
 
 void key_pressed_cb(XPointer arg, XRecordInterceptData *d);
