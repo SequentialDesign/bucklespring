@@ -5,8 +5,8 @@
 
 #include "buckle.h"
 
+/* start hex for mouse button wav files*/
 #define initial_button_hex 0xf0
-
 
 void key_pressed_cb(XPointer arg, XRecordInterceptData *d);
 
