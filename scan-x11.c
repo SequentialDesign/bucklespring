@@ -5,6 +5,9 @@
 
 #include "buckle.h"
 
+#define initial_button_hex 0xf0
+
+
 void key_pressed_cb(XPointer arg, XRecordInterceptData *d);
 
 int scan(int verbose)
@@ -68,7 +71,6 @@ void key_pressed_cb(XPointer arg, XRecordInterceptData *d)
     key -= 8; /* X code to scan code? */
     
     if(!repeat) {
-        
         switch (type) {
         case KeyPress:
             play(key, 1);
@@ -76,15 +78,9 @@ void key_pressed_cb(XPointer arg, XRecordInterceptData *d)
         case KeyRelease:
             play(key, 0);
             break;
-            /*case ButtonPress:
-                                play(0xff, 1);
-                                break;
-			case ButtonRelease:
-				play(0xff, 0);
-                                break;*/
         case ButtonPress:
-            switch(key) {
-                //if(key == -5 || key == -6 || key == -7 || key == -4 || key == -3 || key == -2 || key == -1 || key == 0 || key == 1 || key == 2 || key == 3 || key == 4 || key == 5)
+            play(key + 7 + initial_button_hex, 1);
+            /*switch(key) {
             case -7: // left-click button 1
                 play(0xf0, 1);
                 break;
@@ -123,11 +119,11 @@ void key_pressed_cb(XPointer arg, XRecordInterceptData *d)
                 break;
             default:
                 break;
-            }
+            }*/
             break;
         case ButtonRelease:
-            switch(key) {
-                //if(key == -5 || key == -6 || key == -7 || key == -4 || key == -3 || key == -2 || key == -1 || key == 0 || key == 1 || key == 2 || key == 3 || key == 4 || key == 5)
+            play(key + 7 + initial_button_hex, 1);
+            /*switch(key) {
             case -7: // left-click button 1
                 play(0xf0, 0);
                 break;
@@ -164,7 +160,7 @@ void key_pressed_cb(XPointer arg, XRecordInterceptData *d)
                 break;
             default:
                 break;
-            }
+            }*/
             break;
         default:
             break;
